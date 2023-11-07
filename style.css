@@ -1,0 +1,145 @@
+:root {
+    --topaz-red:#e32430;
+    --screen-purple:#6b65c1;
+    --shiny-gold-gradient: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                           radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+  }
+
+*,
+*:before,
+*:after {
+box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator-case {
+    width: 495px;
+    height: 915px;
+    clip-path: polygon(50% 100%,
+                        45% 95%,
+                        5% 95%,
+                        0% 90%,
+                        0% 85%,
+                        2.5% 80%,
+                        2.5% 15%,
+                        0% 10%,
+                        0% 5%,
+                        5% 0%,
+                        65% 0%,
+                        70% 5%,
+                        95% 5%,
+                        100% 10%,
+                        100% 15%,
+                        97.5% 20%,
+                        97.5% 80%,
+                        100% 90%,
+                        100% 90%,
+                        85% 100%);
+    background: var(--shiny-gold-gradient);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex:0 0 auto;
+}
+
+.calculator {
+    width: 480px;
+    height: 900px;
+    clip-path: polygon(50% 100%,
+                        45% 95%,
+                        5% 95%,
+                        0% 90%,
+                        0% 85%,
+                        2.5% 80%,
+                        2.5% 15%,
+                        0% 10%,
+                        0% 5%,
+                        5% 0%,
+                        65% 0%,
+                        70% 5%,
+                        95% 5%,
+                        100% 10%,
+                        100% 15%,
+                        97.5% 20%,
+                        97.5% 80%,
+                        100% 90%,
+                        100% 90%,
+                        85% 100%);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-color: var(--topaz-red);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex:0 0 auto;
+}
+
+.calculator-screen {
+    width: 410px;
+    height: 170px;
+    flex: 0 0 auto;
+    border-radius: 25px;
+    background: var(--shiny-gold-gradient);
+    position: relative;
+}
+
+.calculator-screen::before {
+    content: '';
+    width: 400px;
+    height: 160px;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    border-radius: 25px;
+    background-color: var(--screen-purple);
+}
+
+.calculator-button-group {
+    width: 400px;
+    height: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.calculator-button-subgroup {
+    width: 400px;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.calculator-button, .calculator-button-double, .operator-button {
+    width: 80px;
+    height: 80px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+.calculator-button-double {
+    width: 186.67px;
+    border-radius: 32px;
+}
+
+.operator-button {
+
+}
