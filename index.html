@@ -5,47 +5,64 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Monofett&family=VT323&display=swap" rel="stylesheet">
+    <script src="calculator.js" type="module" defer></script>
     <title>Document</title>
 </head>
 <body>
+    <img class="main-img">
     <div class="calculator-case">
         <div class="calculator">
             <div class="calculator-screen">
-    
+                <div class="num-row-screen top-screen"></div>
+                <div class="num-row-screen bottom-screen"></div>
             </div>
+            <img class="topaz-logo-img" src="media/img/topaz (2).png">
             <div class="calculator-button-group">
                 <div class="calculator-button-subgroup">
-                    <button class="calculator-button"></button>
-                    <button class="calculator-button"></button>
-                    <button class="calculator-button"></button>
-                    <button class="operator-button"></button>
+                    <button class="calculator-button clear-button">AC</button>
+                    <button class="calculator-button modifier-button">+/-</button>
+                    <button class="calculator-button modifier-button">%</button>
+                    <button class="calculator-button operator-button">&divide;</button>
                 </div>
                 <div class="calculator-button-subgroup">
-                    <button class="calculator-button"></button>
-                    <button class="calculator-button"></button>
-                    <button class="calculator-button"></button>
-                    <button class="operator-button"></button>
+                    <button class="calculator-button num-button">7</button>
+                    <button class="calculator-button num-button">8</button>
+                    <button class="calculator-button num-button">9</button>
+                    <button class="calculator-button operator-button">&times;</button>
                 </div>
                 <div class="calculator-button-subgroup">
-                    <button class="calculator-button"></button>
-                    <button class="calculator-button"></button>
-                    <button class="calculator-button"></button>
-                    <button class="operator-button"></button>
+                    <button class="calculator-button num-button">4</button>
+                    <button class="calculator-button num-button">5</button>
+                    <button class="calculator-button num-button">6</button>
+                    <button class="calculator-button operator-button">-</button>
                 </div>
                 <div class="calculator-button-subgroup">
-                    <button class="calculator-button"></button>
-                    <button class="calculator-button"></button>
-                    <button class="calculator-button"></button>
-                    <button class="operator-button"></button>
+                    <button class="calculator-button num-button">1</button>
+                    <button class="calculator-button num-button">2</button>
+                    <button class="calculator-button num-button">3</button>
+                    <button class="calculator-button operator-button">+</button>
                 </div>
                 <div class="calculator-button-subgroup">
-                    <button class="calculator-button-double"></button>
-                    <button class="calculator-button"></button>
-                    <button class="operator-button"></button>
+                    <button class="calculator-button calculator-button-double">0</button>
+                    <button class="calculator-button modifier-button">.</button>
+                    <button class="calculator-button operator-button">=</button>
                 </div>
             </div>
         </div>
     </div>
-    
+    <!-- <div class="topaz-stonks-modal-container">
+        <img class="topaz-stonks-img" src="" >
+        <div class="arrow-container">
+            <div class="base-of-arrow"></div>
+            <div class="mid-of-arrow"></div>
+            <div class="arrow-head"></div>
+        </div>
+    </div> -->
 </body>
 </html>
