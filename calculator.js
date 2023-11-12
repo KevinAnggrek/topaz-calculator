@@ -31,14 +31,7 @@ numButtons.forEach((numButton) => {
 operatorButtons.forEach((operatorButton) => {
     if (operatorButton.innerHTML==='=') {
         operatorButton.addEventListener('click', (e) => {
-            if (currentOperator!=='' && firstNum!=='' && secondNum!=='') {
-                updateTopScreen();
-                firstNum = operate(firstNum,currentOperator,secondNum);
-                secondNum = '';
-                currentOperator = '';
-                updateBottomScreen();
-                toggleMode();
-            }
+            performOperation();
         });
     }
     else {
@@ -48,10 +41,10 @@ operatorButtons.forEach((operatorButton) => {
                 currentOperator=clickedOperator;
                 toggleMode();
             }
-            else { // Allows for reassignment of operator
-                if (secondNum==='') {
-                    currentOperator=clickedOperator;
-                }
+            else { 
+                if (performOperation()) toggleMode();
+                currentOperator=clickedOperator;
+                
             }
             updateBottomScreen();
         });
@@ -65,6 +58,45 @@ clearButton.addEventListener('click', () => {
     currentMode=DEFAULT_MODE;
     bottomScreen.innerHTML='';
     topScreen.innerHTML='';
+});
+
+modifierButtons.forEach(modButton => {
+    if (modButton.innerHTML==='←') {
+        modButton.addEventListener('click', (e) => {
+            if (currentMode==='FIRST_NUM' && firstNum!=='') {
+                firstNum = firstNum.slice(0,-1);
+                updateBottomScreen();
+            }
+            else if (currentMode==='SECOND_NUM' && secondNum!=='') {
+                secondNum = secondNum.slice(0,-1);
+                updateBottomScreen();
+            }
+        });
+    }
+    else if (modButton.innerHTML==='+/-') {
+        modButton.addEventListener('click', (e) => {
+            if (currentMode==='FIRST_NUM' && firstNum!=='') {
+                firstNum = '-' + firstNum;
+                updateBottomScreen();
+            }
+            else if (currentMode==='SECOND_NUM' && secondNum!=='') {
+                secondNum = '-' + secondNum;
+                updateBottomScreen();
+            }
+        });
+    }
+    else if (modButton.innerHTML==='.') {
+        modButton.addEventListener('click', (e) => {
+            if (currentMode==='FIRST_NUM' && firstNum!=='' && firstNum.indexOf('.') <= -1) {
+                firstNum = firstNum + '.';
+                updateBottomScreen();
+            }
+            else if (currentMode==='SECOND_NUM' && secondNum!=='' && secondNum.indexOf('.') <= -1) {
+                secondNum = secondNum + '.';
+                updateBottomScreen();
+            }
+        });
+    }
 })
 
 // DOM & UI Functions
@@ -82,6 +114,19 @@ function toggleMode() {
     }
     else if (currentMode==='SECOND_NUM') {
         currentMode='FIRST_NUM';
+    }
+}
+
+function performOperation() {
+    if (currentOperator!=='' && firstNum!=='' && secondNum!=='') {
+        updateTopScreen();
+        firstNum = operate(firstNum,currentOperator,secondNum).toString();
+        secondNum = '';
+        currentOperator = '';
+        updateBottomScreen();
+        toggleMode();
+
+        return true;
     }
 }
 
