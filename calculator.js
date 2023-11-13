@@ -17,7 +17,14 @@ const clearButton = document.querySelector('.clear-button');
 // DOM Event Listeners
 numButtons.forEach((numButton) => {
     numButton.addEventListener('click', (e) => {
+        if (currentMode==='ERROR_MODE') { // Check if Calculator is in error due to division by zero
+            clearData();
+            return;
+        }
         let clickedNum = e.target.innerText;
+        if (clickedNum==='0'&& (firstNum==='0' || secondNum==='0')) { // Prevent spamming meaningless zeroes
+            return;
+        }
         if (currentMode==='FIRST_NUM') {
             firstNum+=clickedNum;
         }
@@ -31,20 +38,35 @@ numButtons.forEach((numButton) => {
 operatorButtons.forEach((operatorButton) => {
     if (operatorButton.innerHTML==='=') {
         operatorButton.addEventListener('click', (e) => {
+            if (currentMode==='ERROR_MODE') {
+                clearData();
+                return;
+            }
+            if (secondNum==='0' && currentOperator==='÷') {
+                showDivideByZeroError();
+                return;
+            }
             performOperation();
         });
     }
     else {
         operatorButton.addEventListener('click', (e) => {
             let clickedOperator = e.target.innerText;
+            if (currentMode==='ERROR_MODE') {
+                clearData();
+                return;
+            }
             if (currentMode==='FIRST_NUM') {
                 currentOperator=clickedOperator;
                 toggleMode();
             }
-            else { 
+            else {
+                if (secondNum==='0' && currentOperator==='÷') {
+                    showDivideByZeroError();
+                    return;
+                }
                 if (performOperation()) toggleMode();
                 currentOperator=clickedOperator;
-                
             }
             updateBottomScreen();
         });
@@ -52,17 +74,16 @@ operatorButtons.forEach((operatorButton) => {
 });
 
 clearButton.addEventListener('click', () => {
-    firstNum='';
-    secondNum='';
-    currentOperator='';
-    currentMode=DEFAULT_MODE;
-    bottomScreen.innerHTML='';
-    topScreen.innerHTML='';
+    clearData();
 });
 
 modifierButtons.forEach(modButton => {
     if (modButton.innerHTML==='←') {
         modButton.addEventListener('click', (e) => {
+            if (currentMode==='ERROR_MODE') {
+                clearData();
+                return;
+            }
             if (currentMode==='FIRST_NUM' && firstNum!=='') {
                 firstNum = firstNum.slice(0,-1);
                 updateBottomScreen();
@@ -75,6 +96,10 @@ modifierButtons.forEach(modButton => {
     }
     else if (modButton.innerHTML==='+/-') {
         modButton.addEventListener('click', (e) => {
+            if (currentMode==='ERROR_MODE') {
+                clearData();
+                return;
+            }
             if (currentMode==='FIRST_NUM' && firstNum!=='') {
                 firstNum = '-' + firstNum;
                 updateBottomScreen();
@@ -87,6 +112,10 @@ modifierButtons.forEach(modButton => {
     }
     else if (modButton.innerHTML==='.') {
         modButton.addEventListener('click', (e) => {
+            if (currentMode==='ERROR_MODE') {
+                clearData();
+                return;
+            }
             if (currentMode==='FIRST_NUM' && firstNum!=='' && firstNum.indexOf('.') <= -1) {
                 firstNum = firstNum + '.';
                 updateBottomScreen();
@@ -102,6 +131,12 @@ modifierButtons.forEach(modButton => {
 // DOM & UI Functions
 function updateBottomScreen() {
     bottomScreen.innerHTML = `${firstNum} ${currentOperator} ${secondNum}`;
+}
+
+function showDivideByZeroError() {
+    bottomScreen.innerHTML = "That would blow up your taxes y'know ヽ(*⌒▽⌒*)ﾉ";
+    updateTopScreen();
+    currentMode='ERROR_MODE';
 }
 
 function updateTopScreen() {
@@ -130,6 +165,15 @@ function performOperation() {
     }
 }
 
+function clearData() {
+    firstNum='';
+    secondNum='';
+    currentOperator='';
+    currentMode=DEFAULT_MODE;
+    bottomScreen.innerHTML='';
+    topScreen.innerHTML='';
+}
+
 // Operation Functions
 function operate(firstNum, operator, secondNum) {
     if (operator==='+'){
@@ -148,17 +192,21 @@ function operate(firstNum, operator, secondNum) {
 
 // Math Functions
 function add(num1,num2) {
-    return num1 + num2;
+    return roundToPrecision(num1 + num2,5);
 }
 
 function subtract(num1,num2) {
-    return num1 - num2;
+    return roundToPrecision(num1 - num2,5);
 }
 
 function multiply(num1,num2) {
-    return num1 * num2;
+    return roundToPrecision(num1 * num2,5);
 }
 
 function divide(num1,num2) {
-    return num1 / num2;
+    return roundToPrecision(num1 / num2,5);
+}
+
+function roundToPrecision(num, precision) {
+    return Math.round(num * Math.pow(10,precision)) / Math.pow(10,precision);
 }
