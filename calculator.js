@@ -16,11 +16,17 @@ const clearButton = document.querySelector('.clear-button');
 
 // DOM Event Listeners
 numButtons.forEach((numButton) => {
-    numButton.addEventListener('click', handleNumInputs);
+    numButton.addEventListener('click', (ev) => {
+        const clickedNum = ev.target.innerText;
+        handleNumInputs(clickedNum);
+    });
 });
 
 operatorButtons.forEach((operatorButton) => {
-    operatorButton.addEventListener('click', handleOperatorInputs); 
+    operatorButton.addEventListener('click', (ev) => {
+        const clickedOperator = ev.target.innerText;
+        handleOperatorInputs(clickedOperator);
+    }); 
 });
 
 clearButton.addEventListener('click', () => {
@@ -28,19 +34,36 @@ clearButton.addEventListener('click', () => {
 });
 
 modifierButtons.forEach(modButton => {
-    modButton.addEventListener('click', handleModifierInputs);
+    modButton.addEventListener('click', (ev) => {
+        const clickedMod = ev.target.innerText;
+        handleModifierInputs(clickedMod);
+    });
 });
 
 // KeyboardEvent for the Calculator
+document.addEventListener('keydown', (ev) => {
+    const keyName = ev.key;
 
+    if (isFinite(keyName)) {
+        handleNumInputs(keyName);
+    }
+    else if (['+','-','*','/','=','Enter'].includes(keyName)) {
+        if (keyName==='Enter' || keyName==='=') handleOperatorInputs('=');
+        else if (keyName==='/') handleOperatorInputs('÷');
+        else if (keyName==='*') handleOperatorInputs('×');
+        else handleOperatorInputs(keyName);
+    }
+    else if (keyName==='Escape') clearData();
+    else if (keyName==='.') handleModifierInputs(keyName);
+    else if (keyName==='Backspace') handleModifierInputs('←');
+})
 
 // DOM & UI Functions
-function handleNumInputs(ev) {
+function handleNumInputs(clickedNum) {
     if (currentMode==='ERROR_MODE') { // Check if Calculator is in error due to division by zero
         clearData();
         return;
     }
-    let clickedNum = ev.target.innerText;
     if (clickedNum==='0'&& (firstNum==='0' || secondNum==='0')) { // Prevent spamming meaningless zeroes
         return;
     }
@@ -53,14 +76,11 @@ function handleNumInputs(ev) {
     updateBottomScreen();
 }
 
-function handleOperatorInputs(ev) {
+function handleOperatorInputs(clickedOperator) {
     if (currentMode==='ERROR_MODE') {
         clearData();
         return;
     }
-
-    let clickedOperator = ev.target.innerText;
-
     if (clickedOperator==='=') {
         if (secondNum==='0' && currentOperator==='÷') {
             showDivideByZeroError();
@@ -85,14 +105,11 @@ function handleOperatorInputs(ev) {
     }
 }
 
-function handleModifierInputs(ev) {
+function handleModifierInputs(clickedMod) {
     if (currentMode==='ERROR_MODE') {
         clearData();
         return;
     }
-    
-    let clickedMod = ev.target.innerText;
-
     if (clickedMod==='←') {
         if (currentMode==='FIRST_NUM' && firstNum!=='') {
             firstNum = firstNum.slice(0,-1);
