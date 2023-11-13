@@ -16,61 +16,11 @@ const clearButton = document.querySelector('.clear-button');
 
 // DOM Event Listeners
 numButtons.forEach((numButton) => {
-    numButton.addEventListener('click', (e) => {
-        if (currentMode==='ERROR_MODE') { // Check if Calculator is in error due to division by zero
-            clearData();
-            return;
-        }
-        let clickedNum = e.target.innerText;
-        if (clickedNum==='0'&& (firstNum==='0' || secondNum==='0')) { // Prevent spamming meaningless zeroes
-            return;
-        }
-        if (currentMode==='FIRST_NUM') {
-            firstNum+=clickedNum;
-        }
-        else {
-            secondNum+=clickedNum;
-        }
-        updateBottomScreen();
-    });
+    numButton.addEventListener('click', handleNumInputs);
 });
 
 operatorButtons.forEach((operatorButton) => {
-    if (operatorButton.innerHTML==='=') {
-        operatorButton.addEventListener('click', (e) => {
-            if (currentMode==='ERROR_MODE') {
-                clearData();
-                return;
-            }
-            if (secondNum==='0' && currentOperator==='÷') {
-                showDivideByZeroError();
-                return;
-            }
-            performOperation();
-        });
-    }
-    else {
-        operatorButton.addEventListener('click', (e) => {
-            let clickedOperator = e.target.innerText;
-            if (currentMode==='ERROR_MODE') {
-                clearData();
-                return;
-            }
-            if (currentMode==='FIRST_NUM') {
-                currentOperator=clickedOperator;
-                toggleMode();
-            }
-            else {
-                if (secondNum==='0' && currentOperator==='÷') {
-                    showDivideByZeroError();
-                    return;
-                }
-                if (performOperation()) toggleMode();
-                currentOperator=clickedOperator;
-            }
-            updateBottomScreen();
-        });
-    }
+    operatorButton.addEventListener('click', handleOperatorInputs); 
 });
 
 clearButton.addEventListener('click', () => {
@@ -78,57 +28,103 @@ clearButton.addEventListener('click', () => {
 });
 
 modifierButtons.forEach(modButton => {
-    if (modButton.innerHTML==='←') {
-        modButton.addEventListener('click', (e) => {
-            if (currentMode==='ERROR_MODE') {
-                clearData();
-                return;
-            }
-            if (currentMode==='FIRST_NUM' && firstNum!=='') {
-                firstNum = firstNum.slice(0,-1);
-                updateBottomScreen();
-            }
-            else if (currentMode==='SECOND_NUM' && secondNum!=='') {
-                secondNum = secondNum.slice(0,-1);
-                updateBottomScreen();
-            }
-        });
-    }
-    else if (modButton.innerHTML==='+/-') {
-        modButton.addEventListener('click', (e) => {
-            if (currentMode==='ERROR_MODE') {
-                clearData();
-                return;
-            }
-            if (currentMode==='FIRST_NUM' && firstNum!=='') {
-                firstNum = '-' + firstNum;
-                updateBottomScreen();
-            }
-            else if (currentMode==='SECOND_NUM' && secondNum!=='') {
-                secondNum = '-' + secondNum;
-                updateBottomScreen();
-            }
-        });
-    }
-    else if (modButton.innerHTML==='.') {
-        modButton.addEventListener('click', (e) => {
-            if (currentMode==='ERROR_MODE') {
-                clearData();
-                return;
-            }
-            if (currentMode==='FIRST_NUM' && firstNum!=='' && firstNum.indexOf('.') <= -1) {
-                firstNum = firstNum + '.';
-                updateBottomScreen();
-            }
-            else if (currentMode==='SECOND_NUM' && secondNum!=='' && secondNum.indexOf('.') <= -1) {
-                secondNum = secondNum + '.';
-                updateBottomScreen();
-            }
-        });
-    }
-})
+    modButton.addEventListener('click', handleModifierInputs);
+});
+
+// KeyboardEvent for the Calculator
+
 
 // DOM & UI Functions
+function handleNumInputs(ev) {
+    if (currentMode==='ERROR_MODE') { // Check if Calculator is in error due to division by zero
+        clearData();
+        return;
+    }
+    let clickedNum = ev.target.innerText;
+    if (clickedNum==='0'&& (firstNum==='0' || secondNum==='0')) { // Prevent spamming meaningless zeroes
+        return;
+    }
+    if (currentMode==='FIRST_NUM') {
+        firstNum+=clickedNum;
+    }
+    else {
+        secondNum+=clickedNum;
+    }
+    updateBottomScreen();
+}
+
+function handleOperatorInputs(ev) {
+    if (currentMode==='ERROR_MODE') {
+        clearData();
+        return;
+    }
+
+    let clickedOperator = ev.target.innerText;
+
+    if (clickedOperator==='=') {
+        if (secondNum==='0' && currentOperator==='÷') {
+            showDivideByZeroError();
+            return;
+        }
+        performOperation();
+    }
+    else {
+        if (currentMode==='FIRST_NUM') {
+            currentOperator=clickedOperator;
+            toggleMode();
+        }
+        else {
+            if (secondNum==='0' && currentOperator==='÷') {
+                showDivideByZeroError();
+                return;
+            }
+            if (performOperation()) toggleMode();
+            currentOperator=clickedOperator;
+        }
+        updateBottomScreen();
+    }
+}
+
+function handleModifierInputs(ev) {
+    if (currentMode==='ERROR_MODE') {
+        clearData();
+        return;
+    }
+    
+    let clickedMod = ev.target.innerText;
+
+    if (clickedMod==='←') {
+        if (currentMode==='FIRST_NUM' && firstNum!=='') {
+            firstNum = firstNum.slice(0,-1);
+            updateBottomScreen();
+        }
+        else if (currentMode==='SECOND_NUM' && secondNum!=='') {
+            secondNum = secondNum.slice(0,-1);
+            updateBottomScreen();
+        }
+    }
+    else if (clickedMod==='+/-') {
+        if (currentMode==='FIRST_NUM' && firstNum!=='') {
+            firstNum = '-' + firstNum;
+            updateBottomScreen();
+        }
+        else if (currentMode==='SECOND_NUM' && secondNum!=='') {
+            secondNum = '-' + secondNum;
+            updateBottomScreen();
+        }
+    }
+    else if (clickedMod==='.') {
+        if (currentMode==='FIRST_NUM' && firstNum!=='' && firstNum.indexOf('.') <= -1) {
+            firstNum = firstNum + '.';
+            updateBottomScreen();
+        }
+        else if (currentMode==='SECOND_NUM' && secondNum!=='' && secondNum.indexOf('.') <= -1) {
+            secondNum = secondNum + '.';
+            updateBottomScreen();
+        }
+    }
+}
+
 function updateBottomScreen() {
     bottomScreen.innerHTML = `${firstNum} ${currentOperator} ${secondNum}`;
 }
