@@ -1,6 +1,11 @@
 :root {
     --topaz-red:#e32430;
+    --topaz-light-red:#fa5964;
     --topaz-wine:#85192d;
+    --topaz-yellow:#ffed9f;
+    --topaz-gold:#fbde2f;
+    --topaz-grey: #b5b5ce;
+    --topaz-light-grey:#e6e8f5;
     --screen-purple:#6b65c1;
     --root2: 1.41421356237;
     --shiny-gold-gradient: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
@@ -13,25 +18,70 @@
 box-sizing: border-box;
 }
 
+@font-face {
+    font-family: 'Swiss 911';
+    src: url(./media/fonts/swiss-911-extra-compressed.otf) format('opentype');
+}
+
 html {
+    min-width: 100%;
     height: 100%;
-    background-image: url(./media/img/andy-holmes-rCbdp8VCYhQ-unsplash.jpg);
-    background-repeat: no-repeat;
+    background-color: black;
+    background-image: url(./media/img/oscar-estrela-schott-DVII_XYUQAs-unsplash.jpg);
+    background-repeat: repeat;
     background-size: cover;
 }
 
 body {
-    position: relative;
-    height: 100%;
+    /* position: relative; */
+    min-height: 100%;
+    width: 100%;
     margin: 0;
+    padding-bottom: 100px;
+    
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 200px;
+}
+
+.main-img-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.topaz-logo-text {
+    /* position: relative;
+    top: 0;
+    left: 0; */
+    font-family: 'Swiss 911', sans-serif;
+    color: var(--topaz-light-red);
+    font-size: 100px;
+    text-shadow: -15px 5px 20px #ced0d3;
+    text-shadow: 5px 5px 0px var(--topaz-red), 
+    10px 10px 0px var(--topaz-wine), 
+    15px 15px 0px  var(--topaz-light-grey), 
+    20px 20px 0px var(--topaz-grey);
+
+}
+
+.main-img {
+    animation-name: calc-fadein-from-top,move-up-down;
+    animation-delay: 0s,2s;
+    animation-duration: 2s,2s;
+    animation-iteration-count: 1,infinite;
+    animation-timing-function: ease-in,ease-in-out;
 }
 
 .calculator-case {
-    position: absolute;
+    /* position: absolute;
     top: 50%;
     left: 50%;
     margin-top: calc(-915px/2);
-    margin-left: calc(-495px/2);
+    margin-left: calc(-495px/2); */
     width: 495px;
     min-height: 915px;
     padding: 7.5px;
@@ -61,7 +111,7 @@ body {
     justify-content: center;
     align-items: center;
     flex:0 0 auto;
-    animation-name: change-opacity;
+    animation-name: calc-fadein-from-top;
     animation-duration: 2s;
     animation-timing-function: ease-in;
 }
@@ -188,54 +238,136 @@ body {
     background: var(--shiny-gold-gradient);
 }
 
-.topaz-stonks-modal-container {
-    position: absolute;
-    top: 25%;
-    left: 25%;
-    z-index: 9;
-    background-color: white;
-    border: 10px solid black;
-}
-
-.arrow-container {
-    position: relative;
-    height: 800px;
-    width: 800px;
-}
-
-.base-of-arrow {
-    position: absolute;
-    bottom: 100px;
-    left: 0px;
-    width: calc(218.2px*var(--root2));
-    height: 50px;
-    transform: rotate(-45deg);
-    border: 1px solid black;
-    background-color: white;
-}
-
-.mid-of-arrow {
-    position: absolute;
-    bottom: calc(var(--root2));
-    left: calc(150px/var(--root2));
-    width: calc(145.5px *var(--root2));
-    height: 50px;
-    transform: rotate(45deg);
-    border: 1px solid black;
-    background-color: white;
-}
-
-.arrow-head {
-    position: absolute;
-    bottom: calc(50px/var(--root2));
-    left: calc(270px/var(--root2));
-    width: calc(436.4px * var(--root2));
-    height: 50px;
-    transform: rotate(-45deg);
-    border: 1px solid black;
-    background-color: white;
-}
-
 @keyframes change-opacity {
     from {opacity: 0;}
+}
+
+@keyframes calc-fadein-from-top {
+    from {
+        opacity: 0;
+        margin-top: -200px;
+    }
+}
+
+@keyframes calc-fadein-from-top-mobile {
+    from {
+        opacity: 0;
+        margin-top: -40px;
+    }
+}
+
+@keyframes move-up-down {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-50px);
+    }
+}
+
+@keyframes move-up-down-mobile {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@media all and (max-width: 480px) {
+    body {
+        row-gap: 40px;
+    }
+
+    .main-img-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-img {
+        max-width: 480px;
+        animation-name: calc-fadein-from-top-mobile,move-up-down-mobile;
+        animation-delay: 0s,2s;
+        animation-duration: 2s,2s;
+        animation-iteration-count: 1,infinite;
+        animation-timing-function: ease-in,ease-in-out;
+
+    }
+
+    .topaz-logo-text {
+        font-size: 20px;
+        text-shadow: 1px 1px 0px var(--topaz-red), 
+        2px 2px 0px var(--topaz-wine), 
+        3px 3px 0px  var(--topaz-light-grey), 
+        4px 4px 0px var(--topaz-grey);
+    }
+
+    .calculator-case {
+        /* position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: calc(-915px/2);
+        margin-left: calc(-495px/2); */
+        width: 330px;
+        min-height: 610px;
+        padding: 7.5px;
+
+    }
+    
+    .calculator {
+        width: 100%;
+        padding-top: calc(66.5px/1.5);
+        padding-bottom: calc(66.5px/1.5);
+    }
+    
+    .calculator-body {
+        min-height: 511px;
+    }
+    
+    .calculator-screen-bezel {
+        width: 273.33px;
+        min-height: 113.33px;
+        padding: 3.33px;
+        border-radius: 16.667px;
+    }
+    
+    .calculator-screen {
+        width: 100%;
+        min-height: 106.667px;
+        border-radius: 16.667px;
+    }
+    
+    .num-row-screen {
+        line-height: 33.33px;
+        font-size: 33.33px;
+        width: 253.33px;
+        min-height: 33.33px;
+    }
+    
+    .calculator-button-group {
+        width: 266.667px;
+        height: 333.33px;
+    }
+    
+    .calculator-button-subgroup {
+        width: 266.667px;
+        height: 53.33px;
+    }
+    
+    .calculator-button {
+        width: 53.33px;
+        height: 53.33px;
+        font-size: 24px;
+    }
+    
+    .calculator-button-double {
+        width: calc(186.67px / 1.5);
+        border-radius: 21.33px;
+    }
+
+    .topaz-logo-img {
+        max-width: 42.667px;
+    }
 }
