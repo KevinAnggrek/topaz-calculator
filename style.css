@@ -39,7 +39,7 @@ body {
     margin: 0;
     padding-bottom: 100px;
     
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -274,6 +274,15 @@ body {
     }
 }
 
+@media all and (max-width: 1540px) {
+    .main-img-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 @media all and (max-width: 480px) {
     body {
         row-gap: 40px;
@@ -293,7 +302,6 @@ body {
         animation-duration: 2s,2s;
         animation-iteration-count: 1,infinite;
         animation-timing-function: ease-in,ease-in-out;
-
     }
 
     .topaz-logo-text {
@@ -313,6 +321,10 @@ body {
         width: 330px;
         min-height: 610px;
         padding: 7.5px;
+
+        animation-name: calc-fadein-from-top-mobile;
+        animation-duration: 2s;
+        animation-timing-function: ease-in;
 
     }
     
