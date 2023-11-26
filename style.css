@@ -12,15 +12,15 @@
                            radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
 }
 
+@font-face {
+    font-family: 'Swiss 911';
+    src: url(./media/fonts/swiss-911-extra-compressed.otf) format('opentype');
+}
+
 *,
 *:before,
 *:after {
 box-sizing: border-box;
-}
-
-@font-face {
-    font-family: 'Swiss 911';
-    src: url(./media/fonts/swiss-911-extra-compressed.otf) format('opentype');
 }
 
 html {
@@ -45,6 +45,25 @@ body {
     align-items: center;
     align-content: flex-start;
     flex-wrap: wrap;
+}
+
+.modal-box::-webkit-scrollbar {
+    width: 10px;
+}
+
+.modal-box::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var(--topaz-wine);
+    visibility: hidden;
+}
+
+.modal-box:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+
+a {
+    color: white;
+    text-decoration: none;
 }
 
 .main-container {
@@ -275,6 +294,74 @@ body {
 
 .footer-logo:hover {
     transform: scale(1.1);
+}
+
+.modal-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.7); /* alpha value is set so that when the modal-container is targeted, its main opacity is turned to 1, allowing the modal-box to appear fully but the transparency of the modal background is set to be translucent black*/
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+
+    display: flex;
+}
+
+.modal-container:target {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-box {
+    margin: auto;
+    width: 600px;
+    height: 800px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: white;
+    font-family: 'Questrial', sans-serif;
+    /* font-family: 'Spae Mono',monospace; */
+}
+
+.modal-header {
+    width: 100%;
+    height: 100px;
+    padding: 25px;
+    background-color: var(--topaz-red);
+    color: white;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.modal-header-title-group {
+    display: flex;
+    align-items: center;
+}
+
+.modal-icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.modal-closer {
+    font-size: 50px;
+}
+
+.modal-body {
+    padding: 5px 25px;
+}
+
+.modal-link {
+    color: var(--topaz-wine);
+    text-decoration: underline;
 }
 
 @keyframes change-opacity {

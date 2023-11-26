@@ -7,10 +7,7 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Monofett&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Monofett&family=Questrial&family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
     <script src="calculator.js" type="module" defer></script>
     <title>Document</title>
 </head>
@@ -65,13 +62,70 @@
             </div>
         </div>
     </div>
-    <div class="footer-case">
+    <section class="footer-case">
         <div class="footer">
-            <img class="footer-logo" src="./media/img/Item_Praise_of_High_Morals.webp" alt="credits" title="Credits">
+            <a href="#credits-modal">
+                <img class="footer-logo" src="./media/img/Item_Praise_of_High_Morals.webp" alt="credits" title="Credits">
+            </a>
             <a href="https://github.com/KevinAnggrek/topaz-calculator">
                 <img class="footer-logo" src="./media/img/github-mark.png" alt="github" title="Github">
             </a>
         </div>
+    </section>
+    <div class="modal-container" id="credits-modal">
+        <section class="modal-box">
+            <header class="modal-header">
+                <div class="modal-header-title-group">
+                    <img class="modal-icon" src="./media/img/Item_Praise_of_High_Morals.webp" alt="credits-logo">
+                    <h2>Credits</h2>
+                </div>
+                <a href="#">
+                    <span class="modal-closer">&times;</span>
+                </a>
+            </header>
+            <div class="modal-body">
+                <section>
+                    <h3>Foreword</h3>
+                    <p>
+                        I created this Topaz-themed Calculator as a part of my learning journey with <a class="modal-link" href="https://www.theodinproject.com/">The Odin Project</a>. <br/><br/>
+                        For those who didn't know, Topaz is one of the playable characters in <a class="modal-link" href="https://hsr.hoyoverse.com/en-us/">Honkai: Star Rail</a>, one of Hoyoverse's latest turn-based RPG. <br/><br/>
+                        She is one of the top managers of the Strategic Investment Department working for the IPC. Her overall character design is based around money, investment, debt collections, and contracts which prompted me to design this simple calculator project! <br/><br/>
+                        This personal project is far from perfect and might not showcase the most optimal/efficient/effective method for making a simple calculator on the webopage. Nevertheless, I had fun making this project! As fun much as trailbalzing the universe, hopping between Aurum Alley and the Herta Space Station, and meeting new friends across the galaxies! <br/><br/>
+                    </p>
+                    <p>
+                        Special thanks to all the developers, creators, artists, and people  mentioned below whose 
+                        code/drawings/images/assets have helped me to style and realize this project!
+                    </p>
+                </section>
+                <section>
+                    <h4>Images/Drawings</h3>
+                    <ul class="credit-list">
+                        <li>Starry Sky Background: Oscar Estrela-Schøtt at <a class="modal-link" href="https://unsplash.com/photos/black-textile-on-black-textile-DVII_XYUQAs">Unsplash</a></li>
+                        <li>Topaz Image: AI-generated and edited by myself </li>
+                        <ul>
+                            <li>Stable Diffusion: <a class="modal-link" href="https://github.com/AUTOMATIC1111/stable-diffusion-webui">Stable Diffusion Web UI by AUTOMATIC1111</a></li>
+                            <li>Model Used: <a class="modal-link" href="https://civitai.com/models/7240?modelVersionId=119057">MeinaMix</a></li>
+                            <li>LoRA Used: <a href="https://civitai.com/models/170351?modelVersionId=191418">Topaz LoRa by KXRO</a></li>
+                        </ul>
+                    </ul>
+                </section>
+                <section>
+                    <h4>CSS</h4>
+                    <ul class="credit-list">
+                        <li>Golden Accents: <a class="modal-link" href="https://codepen.io/chilliconcode/pen/OWxqYR">CSS Gold Gradient</a> by chilli con code</li>
+                        <li>Title Shadowing: <a class="modal-link" href="https://codepen.io/antoniasymeonidou/pen/ZEXYaKg">Butter</a> by @antoniasymeonidou</li>
+                    </ul>
+                </section>
+                <section>
+                    <h4>Other Assets/Icons</h4>
+                    <ul class="credit-list">
+                        <li>Topaz Stone Icon on Calculator: <a class="modal-link" href="https://www.flaticon.com/free-icon/topaz_10582580?term=topaz&page=1&position=8&origin=search&related_id=10582580">Topaz Icon</a> by Vitaly Gorbachev</li>
+                        <li>Praise of High Moral icon: <a class="modal-link" href="https://honkai-star-rail.fandom.com/wiki/Praise_of_High_Morals?file=Item_Praise_of_High_Morals.png">Honkai: Star Rail Fandom</a></li>
+                    </ul>
+                </section>
+
+            </div>
+        </section>
     </div>
     
 </body>
