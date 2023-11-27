@@ -456,6 +456,11 @@ a {
         7.5px 7.5px 0px  var(--topaz-light-grey), 
         10px 10px 0px var(--topaz-grey);
     }
+
+    .modal-box {
+        width: 400px;
+        height: 600px;
+    }
 }
 
 @media all and (max-width: 480px) {
