@@ -90,6 +90,7 @@ function handleOperatorInputs(clickedOperator) {
     }
     else {
         if (currentMode==='FIRST_NUM') {
+            if (firstNum==='') return;
             currentOperator=clickedOperator;
             toggleMode();
         }
