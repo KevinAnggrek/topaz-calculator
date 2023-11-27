@@ -47,6 +47,15 @@ body {
     flex-wrap: wrap;
 }
 
+html::-webkit-scrollbar {
+    width: 15px;
+}
+
+html::-webkit-scrollbar-thumb {
+    border-radius: 7.5px;
+    background-color: var(--topaz-wine);
+}
+
 .modal-box::-webkit-scrollbar {
     width: 10px;
 }
